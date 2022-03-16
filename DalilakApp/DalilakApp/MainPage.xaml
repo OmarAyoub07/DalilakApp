@@ -3,11 +3,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DalilakApp.MainPage">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Dalilak" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Button x:Name="btn_login" Text="Login" Clicked="btn_login_Clicked"/>
-    </StackLayout>
+    <!--left top right bottom-->
+    <Grid Margin= "   20 , 25 , 20  ,  20    ">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="175"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="pageTitlelbl"
+                Grid.Row="0" 
+                Grid.ColumnSpan="2" 
+                Text="Dalilak main page" 
+                FontSize="24"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                />
+
+        <SearchBar x:Name="SBSearch"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Placeholder="search events , places , building ..."/>
+
+        <ScrollView BackgroundColor="White" Grid.Row="2" Grid.ColumnSpan="2"  Orientation="Horizontal" x:Name="ScrollViewSclv">
+            <StackLayout Orientation="Horizontal" Padding="10">
+                <Image x:Name="img"></Image>
+            </StackLayout>
+        </ScrollView>
+
+
+        <Button Grid.Row="3" Grid.Column="0" Text="Historical places" x:Name="HPbtn"
+                     FontSize="15"
+                     WidthRequest="150"
+                     HeightRequest="150"
+                     CornerRadius="75"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center"/>
+
+        <Button Grid.Row="3" Grid.Column="1" Text="Natural places" x:Name="NPbtn"
+                     FontSize="15"
+                     WidthRequest="150"
+                     HeightRequest="150"
+                     CornerRadius="75"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center"/>
+
+        <Button Grid.Row="4" Grid.Column="0" Text="Schedualing" x:Name="Scbtn"
+                     FontSize="15"
+                     WidthRequest="150"
+                     HeightRequest="150"
+                     CornerRadius="75"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center"/>
+
+        <Button Grid.Row="4" Grid.Column="1" Text="Events" x:Name="Evbtn"
+                     FontSize="15"
+                     WidthRequest="150"
+                     HeightRequest="150"
+                     CornerRadius="75"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center"/>
+    </Grid>
 
 </ContentPage>
