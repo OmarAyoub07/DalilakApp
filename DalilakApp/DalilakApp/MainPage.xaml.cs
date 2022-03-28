@@ -12,10 +12,10 @@ using System.IO;
 namespace DalilakApp
 {
     public partial class MainPage : ContentPage
-    {
-        private string loginTxt;
-        private Services.DalilakapiService api = new Services.DalilakapiService();
 
+    {
+        private Services.DalilakapiService api = new Services.DalilakapiService();
+        private User user=new User();
         public MainPage()
         {
             InitializeComponent();
@@ -26,13 +26,31 @@ namespace DalilakApp
 
         private async void btn_login_Clicked(object sender, EventArgs e)
         {
-            //loginTxt = await DisplayPromptAsync("Enter your phone number", "+966");
-            //Services.DalilakapiService api = new Services.DalilakapiService();
             
-            //if(await api.login(loginTxt) == true)
-            //{
-            //    btn_login.Text = "test";
-            //}
+            string loginTxt = await DisplayPromptAsync("Enter your phone number", "+966");
+            string verification = await DisplayPromptAsync("Enter verification code", "0000");
+
+            if (verification == "0000")
+            {
+                string result = api.login(loginTxt).Result;
+                if (result == "notExist")
+                {
+
+                }
+                else
+                {
+                    user = api.getUser(result).Result;
+                }
+                test.Text = user.name;
+            }
+            else
+            {
+                 await DisplayAlert("ERROR", " Invalid verification code ", "OK");
+            }
+
+
+
+
 
         }
 

@@ -71,6 +71,7 @@
                      CornerRadius="75"
                      VerticalOptions="Center"
                      HorizontalOptions="Center"/>
+        <Button Text="log_in" x:Name="test" Clicked="btn_login_Clicked" />
     </Grid>
 
 </ContentPage>
