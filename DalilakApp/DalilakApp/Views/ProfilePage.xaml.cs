@@ -12,9 +12,14 @@ namespace DalilakApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : ContentPage
     {
-        public ProfilePage()
+        private User user = new User();
+        public ProfilePage(User u)
         {
             InitializeComponent();
+            user=u;
+
+            x.Text = user.name;
+
         }
     }
 }

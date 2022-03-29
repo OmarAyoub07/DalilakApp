@@ -63,13 +63,25 @@ namespace DalilakApp.Services
 
             if (response.IsSuccessStatusCode)
             {
-
               return JsonConvert.DeserializeObject<List<User>>(response.Content.ReadAsStringAsync().Result)[0];
-            }else
+            }
+            else
                 return null;
+        }
 
+        /* post user to database */
+        public async Task<bool> postUser(string name, string phone, string email)
+        {
+            uri = new Uri("http://api.dalilak.pro/Insert/NewUser_?name=" + name + "&phone=" + phone + "&email=" + email);
+            response = await client.PostAsync(uri, null);
+            uri = null;
 
-
+            if (response.IsSuccessStatusCode)
+            {
+                return Convert.ToBoolean(response.Content.ReadAsStringAsync().Result);
+            }
+            else
+                return false;
         }
         
     }

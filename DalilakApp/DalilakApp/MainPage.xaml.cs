@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Newtonsoft.Json;
 using System.IO;
+using DalilakApp.Views;
 
 namespace DalilakApp
 {
@@ -15,7 +16,7 @@ namespace DalilakApp
 
     {
         private Services.DalilakapiService api = new Services.DalilakapiService();
-        private User user=new User();
+        private User user=null;
         public MainPage()
         {
             InitializeComponent();
@@ -26,53 +27,111 @@ namespace DalilakApp
 
         private async void btn_login_Clicked(object sender, EventArgs e)
         {
-            
-            string loginTxt = await DisplayPromptAsync("Enter your phone number", "+966");
-            string verificationTxt;
-            int counter = 0;
-            string verificationCode = await api.getRNG();
-            do
+            if(user == null)
+                login();
+            else
             {
-
-                verificationTxt = await DisplayPromptAsync("Enter verification code", verificationCode);
-                if (verificationTxt == verificationCode)
-                {
-                    string result = await api.login(loginTxt);
-                    if (result == "notExist")
-                    {
-
-                    }
-                    else
-                    {
-                        user = await api.getUser(result);
-                    }
-                    test.Text = user.name;
-                    break;
-                }
-
-                if (counter==3)
-                {
-                    await DisplayAlert("Notify", " Please log in again  ", "OK");
-                    break;
-                }
-                counter++;
-                await DisplayAlert("Notify", " Invalid verification code ", "OK");
-            } while (verificationTxt != verificationCode);
-           
-              
-            
-           
-
-
-
-
-
+                // Open profiel
+                await Navigation.PushAsync(new ProfilePage(user));
+            }
         }
 
         private async void displayImages()
         {
             byte[] Base64Stream = Convert.FromBase64String(await api.image("b279738fb9a444e49c69173a9379c137"));
             img.Source = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
+        }
+
+        /* Register function - called during login process in special case */
+        private async void Register(string phone)
+        {
+            string name;
+            do
+            {
+                name = await DisplayPromptAsync("Enter your name: ", "");
+
+                if (name != null && name.Length > 0)
+                {
+                    string email;
+                    bool isPosted = false;
+                    do
+                    {
+                        email = await DisplayPromptAsync("Enter your eamil: ", "email@gmail.com");
+
+                        if (email != null && email.Contains("@"))
+                        {
+                            isPosted = await api.postUser(name, phone, email);
+
+                            if (isPosted == true)
+                            {
+                                string result = await api.login(phone);
+                                user = new User();
+                                user = await api.getUser(result);
+                                test.Text = user.name;
+                                break;
+                            }
+                            else
+                                await DisplayAlert("Notify", " You Entered used email ", "OK");
+                        }
+                        else if (email == null)
+                            break;
+                        else
+                            await DisplayAlert("Notify", " Invalid email format ", "OK");
+
+                    }
+                    while (!isPosted);
+                    break;
+                }
+                else if (name == null)
+                    break;
+
+                await DisplayAlert("Notify", " You didn't enter a name ", "OK");
+
+            } while (name.Length <= 0);
+        }
+
+        /* login function */
+        private async void login()
+        {
+            string loginTxt = await DisplayPromptAsync("Enter your phone number", "+966");
+
+            string verificationTxt;
+            int counter = 0;
+            string verificationCode = await api.getRNG();
+
+            if (loginTxt != null)
+            {
+                do
+                {
+                    verificationTxt = await DisplayPromptAsync("Enter verification code", verificationCode);
+
+                    if (verificationTxt == verificationCode)
+                    {
+                        string result = await api.login(loginTxt);
+                        if (result == "notExist")
+                        {
+                            Register(loginTxt);
+                        }
+                        else
+                        {
+                            user = new User();
+                            user = await api.getUser(result);
+                            test.Text = user.name; // test button should be changed later
+                        }
+                        break;
+                    }
+                    else if (verificationTxt == null)
+                        break;
+
+                    if (counter==3)
+                    {
+                        await DisplayAlert("Notify", " Please log in again  ", "OK");
+                        break;
+                    }
+                    counter++;
+                    await DisplayAlert("Notify", " Invalid verification code ", "OK");
+                } while (verificationTxt != verificationCode);
+            }
         }
     }
 }

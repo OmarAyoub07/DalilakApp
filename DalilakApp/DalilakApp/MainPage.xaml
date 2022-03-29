@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DalilakApp.MainPage">
+    
 
     <!--left top right bottom-->
     <Grid Margin= "   20 , 25 , 20  ,  20    ">
@@ -73,5 +74,6 @@
                      HorizontalOptions="Center"/>
         <Button Text="log_in" x:Name="test" Clicked="btn_login_Clicked" />
     </Grid>
+    
 
 </ContentPage>

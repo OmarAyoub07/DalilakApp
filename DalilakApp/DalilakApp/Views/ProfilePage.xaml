@@ -4,9 +4,10 @@
              x:Class="DalilakApp.Views.ProfilePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label x:Name="x"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>
