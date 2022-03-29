@@ -28,25 +28,40 @@ namespace DalilakApp
         {
             
             string loginTxt = await DisplayPromptAsync("Enter your phone number", "+966");
-            string verification = await DisplayPromptAsync("Enter verification code", "0000");
-
-            if (verification == "0000")
+            string verificationTxt;
+            int counter = 0;
+            string verificationCode = await api.getRNG();
+            do
             {
-                string result = api.login(loginTxt).Result;
-                if (result == "notExist")
-                {
 
-                }
-                else
+                verificationTxt = await DisplayPromptAsync("Enter verification code", verificationCode);
+                if (verificationTxt == verificationCode)
                 {
-                    user = api.getUser(result).Result;
+                    string result = await api.login(loginTxt);
+                    if (result == "notExist")
+                    {
+
+                    }
+                    else
+                    {
+                        user = await api.getUser(result);
+                    }
+                    test.Text = user.name;
+                    break;
                 }
-                test.Text = user.name;
-            }
-            else
-            {
-                 await DisplayAlert("ERROR", " Invalid verification code ", "OK");
-            }
+
+                if (counter==3)
+                {
+                    await DisplayAlert("Notify", " Please log in again  ", "OK");
+                    break;
+                }
+                counter++;
+                await DisplayAlert("Notify", " Invalid verification code ", "OK");
+            } while (verificationTxt != verificationCode);
+           
+              
+            
+           
 
 
 

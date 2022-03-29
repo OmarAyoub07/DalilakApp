@@ -42,7 +42,19 @@ namespace DalilakApp.Services
             else
                 return null;
         }
-        /*function to get user*/
+        /* Functaion to get RNG */
+        public async  Task<string> getRNG()
+        {
+            uri = new Uri("http://api.dalilak.pro/System/RNG_");
+            response = await client.GetAsync(uri);
+            uri = null ;
+            if (response.IsSuccessStatusCode)
+                return response.Content.ReadAsStringAsync().Result;
+            else
+                return null;
+
+        }
+        /* function to get user */
         public async Task<User> getUser(string id)
         {
             uri = new Uri("http://api.dalilak.pro/Query/User_?id=" + id);
@@ -52,7 +64,7 @@ namespace DalilakApp.Services
             if (response.IsSuccessStatusCode)
             {
 
-              return JsonConvert.DeserializeObject<User>(response.Content.ReadAsStringAsync().Result);
+              return JsonConvert.DeserializeObject<List<User>>(response.Content.ReadAsStringAsync().Result)[0];
             }else
                 return null;
 
