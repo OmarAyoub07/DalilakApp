@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using DalilakAPI.Models;
 using Newtonsoft.Json;
 
 namespace DalilakApp.Services
@@ -83,6 +84,64 @@ namespace DalilakApp.Services
             else
                 return false;
         }
-        
+        /* Function to get profail image for user */
+        public async Task<string> getProfileImage(string id)
+        {
+
+            uri = new Uri("http://api.dalilak.pro/Query/ProfileImage_?id=" + id);
+
+            response = await client.GetAsync(uri);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+                return response.Content.ReadAsStringAsync().Result.ToString();
+            else
+                return null;
+        }
+        /* get user record */
+        public async Task<History> getRecord(string id)
+        {
+            uri = new Uri("http://api.dalilak.pro/query/UserHistory_?id=" + id);
+            response = await client.GetAsync(uri);
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<History>>(response.Content.ReadAsStringAsync().Result)[0];
+            }
+            else
+                return null;
+
+        }
+
+        /* edit user to database */
+        public async Task<bool> UpdateUser(string id,  string name, int age,  string info, string cityName)
+        {
+            string tempURI = "http://api.dalilak.pro/Insert/UpdateUser_?id=" + id;
+           
+            if (name != "")
+                tempURI += "&name=" + name;
+            if (age !=0 )
+                tempURI += "&age=" + age;
+            if (info != "")
+                tempURI += "&info=" + info;
+            if (cityName != "")
+                tempURI += "&cityName=" + cityName;
+
+            uri = new Uri(tempURI);
+            response = await client.PostAsync(uri, null);
+      
+                uri = null;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Convert.ToBoolean(response.Content.ReadAsStringAsync().Result);
+            }
+            else
+                return false;
+        }
+
+
     }
 }

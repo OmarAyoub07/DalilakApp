@@ -4,9 +4,21 @@
              x:Class="DalilakApp.Views.ProfilePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="x"
+            <StackLayout>
+            <Image x:Name="img"></Image>
+             </StackLayout>
+            <StackLayout>
+                <Label x:Name="x"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            <StackLayout>
+                <Entry x:Name="phone_num" Text=""></Entry>
+            </StackLayout>
+            <Button Text="history" x:Name="btn_history" Clicked="btn_history_Clicked" />
+            <!--<Button Text="edit" x:Name="btn_edit" Clicked="btn_edit_Clicked" />
+            <Button Text="favorit" x:Name="btn_favorit" Clicked="btn_favorit_Clicked" />
+            <Button Text="gaider" x:Name="btn_gaider" Clicked="btn_gaider_Clicked" />-->
         </StackLayout>
         
     </ContentPage.Content>
