@@ -8,16 +8,37 @@
             <Image x:Name="img"></Image>
              </StackLayout>
             <StackLayout>
-                <Label x:Name="x"
+                <Label Text="Phone number" />
+                <Label x:Name="phone_num"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             </StackLayout>
             <StackLayout>
-                <Entry x:Name="phone_num" Text=""></Entry>
+                <Label Text="Email" />
+                <Label x:Name="email"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
             </StackLayout>
-            <Button Text="history" x:Name="btn_history" Clicked="btn_history_Clicked" />
-            <!--<Button Text="edit" x:Name="btn_edit" Clicked="btn_edit_Clicked" />
+            <StackLayout>
+                <Label Text="Name" />
+                <Entry x:Name="name" Text=""></Entry>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Age" />
+                <Entry x:Name="age" Text=""></Entry>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="information" />
+                <Entry x:Name="information" Text=""></Entry>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="city" />
+                <Entry x:Name="city" Text=""></Entry>
+            </StackLayout>
+            
             <Button Text="favorit" x:Name="btn_favorit" Clicked="btn_favorit_Clicked" />
+            <Button Text="edit" x:Name="btn_edit" Clicked="btn_edit_Clicked" />
+            <!--<Button Text="history" x:Name="btn_history" Clicked="btn_history_Clicked" />
             <Button Text="gaider" x:Name="btn_gaider" Clicked="btn_gaider_Clicked" />-->
         </StackLayout>
         

@@ -21,12 +21,13 @@ namespace DalilakApp.Views
             user =u;
             displayImages();
 
-            x.Text = user.name;
-            x.Text += "\n" + user.email;
-            x.Text += "\n" + user.phone_num;
-            x.Text += "\n" + user.age;
-            x.Text += "\n" + user.information;
-            phone_num.Placeholder = user.phone_num;
+            
+            email.Text = user.email;
+            phone_num.Text =user.phone_num;
+            name.Placeholder = user.name;
+            age.Text +=  user.age;
+            information.Placeholder =  user.information;
+            city.Placeholder = user.city_id;
         }
         private async void displayImages()
         {
@@ -34,9 +35,19 @@ namespace DalilakApp.Views
             img.Source = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
         }
 
-        private void btn_history_Clicked(object sender, EventArgs e)
+        private void btn_favorit_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new RecordPage(user.id));
+        }
+
+        private async void btn_edit_Clicked(object sender, EventArgs e)
+        {
+            Boolean state = await api.UpdateUser(user.id, name.Text, Convert.ToInt32(this.age.Text), information.Text, city.Text);
+            if (state)
+            {
+                await DisplayAlert("Note", " The data has been modified  ", "OK");
+            }else
+                await DisplayAlert("ERROR", " Please verify the data entered ", "OK");
         }
     }
 }
