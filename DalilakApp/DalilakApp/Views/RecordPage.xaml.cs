@@ -22,6 +22,24 @@ namespace DalilakApp.Views
             
 
         }
+        public RecordPage(string id,Boolean s)
+        {
+            InitializeComponent();
+            displayFavorite(id);
+
+        }
+        private async void displayFavorite(string id)
+        {
+            History hist = await api.getRecord(id);
+            foreach (var record in hist.records)
+            {
+                if(record.favorite)
+                {
+                    x.Text += record.place_id + " " + record.rate + " " +  "\n";
+                }
+                
+            }
+        }
         private async void display(string id)
         {
             History hist= await api.getRecord(id);
@@ -32,5 +50,6 @@ namespace DalilakApp.Views
 
 
         }
+        
     }
 }

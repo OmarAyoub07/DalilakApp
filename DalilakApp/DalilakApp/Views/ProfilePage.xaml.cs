@@ -35,7 +35,12 @@ namespace DalilakApp.Views
             img.Source = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
         }
 
+        
         private void btn_favorit_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new RecordPage(user.id,true));
+        }
+        private void btn_history_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new RecordPage(user.id));
         }
