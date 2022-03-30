@@ -133,5 +133,12 @@ namespace DalilakApp
                 } while (verificationTxt != verificationCode);
             }
         }
+
+        private async void NPbtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SearchPage("2502dd29-90b6-11ec-8743-bc64bf92", "NAT"));
+                //2502dd29-90b6-11ec-8743-bc64bf92 Taif city ID
+
+        }
     }
 }

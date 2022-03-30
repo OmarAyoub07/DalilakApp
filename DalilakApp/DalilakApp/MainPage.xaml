@@ -50,6 +50,7 @@
                      HorizontalOptions="Center"/>
 
         <Button Grid.Row="3" Grid.Column="1" Text="Natural places" x:Name="NPbtn"
+                     Clicked="NPbtn_Clicked"
                      FontSize="15"
                      WidthRequest="150"
                      HeightRequest="150"

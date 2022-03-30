@@ -17,22 +17,22 @@ namespace DalilakApp.Services
         /* Log in function */
         public async Task<string> login(string phone)
         {
-            uri = new Uri("http://api.dalilak.pro/Login/user_?phone="+phone);
+            uri = new Uri("http://api.dalilak.pro/Login/user_?phone=" + phone);
 
             response = await client.PostAsync(uri, null);
-            
+
             uri = null;
             if (response.IsSuccessStatusCode)
             {
-               return response.Content.ReadAsStringAsync().Result.ToString();
+                return response.Content.ReadAsStringAsync().Result.ToString();
             }
             return null;
         }
 
         public async Task<string> image(string id)
         {
-            
-            uri = new Uri("http://api.dalilak.pro/Query/PlaceImage_?place_id="+id);
+
+            uri = new Uri("http://api.dalilak.pro/Query/PlaceImage_?place_id=" + id);
 
             response = await client.GetAsync(uri);
 
@@ -44,11 +44,11 @@ namespace DalilakApp.Services
                 return null;
         }
         /* Functaion to get RNG */
-        public async  Task<string> getRNG()
+        public async Task<string> getRNG()
         {
             uri = new Uri("http://api.dalilak.pro/System/RNG_");
             response = await client.GetAsync(uri);
-            uri = null ;
+            uri = null;
             if (response.IsSuccessStatusCode)
                 return response.Content.ReadAsStringAsync().Result;
             else
@@ -64,7 +64,7 @@ namespace DalilakApp.Services
 
             if (response.IsSuccessStatusCode)
             {
-              return JsonConvert.DeserializeObject<List<User>>(response.Content.ReadAsStringAsync().Result)[0];
+                return JsonConvert.DeserializeObject<List<User>>(response.Content.ReadAsStringAsync().Result)[0];
             }
             else
                 return null;
@@ -116,13 +116,13 @@ namespace DalilakApp.Services
         }
 
         /* edit user to database */
-        public async Task<bool> UpdateUser(string id,  string name, int age,  string info, string cityName)
+        public async Task<bool> UpdateUser(string id, string name, int age, string info, string cityName)
         {
             string tempURI = "http://api.dalilak.pro/Insert/UpdateUser_?id=" + id;
-           
+
             if (name != "")
                 tempURI += "&name=" + name;
-            if (age !=0 )
+            if (age != 0)
                 tempURI += "&age=" + age;
             if (info != "")
                 tempURI += "&info=" + info;
@@ -131,8 +131,8 @@ namespace DalilakApp.Services
 
             uri = new Uri(tempURI);
             response = await client.PostAsync(uri, null);
-      
-                uri = null;
+
+            uri = null;
 
             if (response.IsSuccessStatusCode)
             {
@@ -142,6 +142,18 @@ namespace DalilakApp.Services
                 return false;
         }
 
+        public async Task<List<Place>> GetPlaces(string Cityid, string placeType)
+        {
+            uri = new Uri("http://api.dalilak.pro/Query/Places_?city_id=" + Cityid+"&place_type="+placeType);
 
+            response = await client.GetAsync(uri);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<List<Place>>(response.Content.ReadAsStringAsync().Result);
+            else
+                return null;
+        }
     }
 }
