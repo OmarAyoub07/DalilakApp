@@ -19,7 +19,7 @@ namespace DalilakApp.Views
         {
             InitializeComponent();
             user =u;
-            displayImages();
+            displayImage();
 
             
             email.Text = user.email;
@@ -29,13 +29,12 @@ namespace DalilakApp.Views
             information.Placeholder =  user.information;
             city.Placeholder = user.city_id;
         }
-        private async void displayImages()
+        private async void displayImage()
         {
             byte[] Base64Stream = Convert.FromBase64String(await api.getProfileImage(user.id));
             img.Source = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
         }
 
-        
         private void btn_favorit_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new RecordPage(user.id,true));

@@ -72,7 +72,15 @@
                      CornerRadius="75"
                      VerticalOptions="Center"
                      HorizontalOptions="Center"/>
-        <Button Text="log_in" x:Name="test" Clicked="btn_login_Clicked" />
+        
+        <Button Grid.Row="5" Grid.Column="1" Text="Login" x:Name="loginbtn"
+                     FontSize="15"
+                     WidthRequest="150"
+                     HeightRequest="150"
+                     CornerRadius="75"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center"
+                     Clicked="btn_login_Clicked"/>
     </Grid>
     
 

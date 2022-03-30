@@ -67,7 +67,7 @@ namespace DalilakApp
                                 string result = await api.login(phone);
                                 user = new User();
                                 user = await api.getUser(result);
-                                test.Text = user.name;
+                                loginbtn.Text = user.name;
                                 break;
                             }
                             else
@@ -116,7 +116,7 @@ namespace DalilakApp
                         {
                             user = new User();
                             user = await api.getUser(result);
-                            test.Text = user.name; // test button should be changed later
+                            loginbtn.Text = user.name; // test button should be changed later
                         }
                         break;
                     }
