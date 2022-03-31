@@ -5,28 +5,49 @@
              Title="search">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="result" Text=" "
-                 />
-            <ScrollView HorizontalOptions="FillAndExpand">
-                <StackLayout
-                HorizontalOptions="FillAndExpand"
-                BackgroundColor="Transparent"
-                BindableLayout.ItemsSource="{Binding imgs}">
+
+            <SearchBar x:Name="SBSearch"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Placeholder="search events , places , building ..."/>
+            
+            <ScrollView HorizontalOptions="FillAndExpand" Orientation="Vertical" VerticalOptions="FillAndExpand">
+                <StackLayout x:Name="imagesStackLayout">
+                    
                     <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout
-                            Orientation="Horizontal"
-                            HeightRequest="150"
-                            HorizontalOptions="FillAndExpand">
+                        <DataTemplate x:Name="imagesList">
+
+                            <Grid HorizontalOptions="Center"
+                                  VerticalOptions="Center">
+                                
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                
                                 <ImageButton
+                                    x:Name="mybuttons"
                                     Source="{Binding source}"
                                     HeightRequest="200"
-                                    BorderColor="black"/>
-                            </StackLayout>
+                                    Aspect="AspectFill"
+                                    TabIndex="{Binding index}"
+                                    Clicked="btn_images_clicked"
+                                    
+                                    />
+                                <Label HorizontalOptions="Start" VerticalOptions="End"
+                                       Text="{Binding name}"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       BackgroundColor="SeaShell"
+                                       Grid.Row="0"/>
+                            </Grid>
+
+
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
+                    
                 </StackLayout>
             </ScrollView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

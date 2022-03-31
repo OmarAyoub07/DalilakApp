@@ -136,7 +136,9 @@ namespace DalilakApp
 
         private async void NPbtn_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SearchPage("2502dd29-90b6-11ec-8743-bc64bf92", "NAT"));
+            var button = sender as Button;
+            string place_type = button.TabIndex == 0 ? "HIS" : button.TabIndex == 1 ? "NAT" : "VNT";
+            await Navigation.PushAsync(new SearchPage("2502dd29-90b6-11ec-8743-bc64bf92", place_type));
                 //2502dd29-90b6-11ec-8743-bc64bf92 Taif city ID
 
         }

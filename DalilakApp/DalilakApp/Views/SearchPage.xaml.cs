@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Collections.ObjectModel;
-using DalilakApp.Models.Binding;
+using DalilakApp.Models.Bindings;
 
 namespace DalilakApp.Views
 {
@@ -16,35 +15,46 @@ namespace DalilakApp.Views
     {
         private Services.DalilakapiService api = new Services.DalilakapiService();
         private List<Place> places = new List<Place>();
-        //private List<ImageButton> imgs = new List<ImageButton>();
-        public ObservableCollection<ImgsBind> imgs = new ObservableCollection<ImgsBind>();
-      
+        private List<ImageFrame> imgFrames = new List<ImageFrame>();
 
-    public SearchPage(string cityId, string Placetype)
+        public SearchPage(string cityId, string Placetype)
         {
             InitializeComponent();
-            getPlaces(cityId, Placetype);
 
+            DisplayPlaces(cityId, Placetype);
         }
 
-        private async void getPlaces(string cityId, string Placetype)
+        private async void btn_images_clicked(object sender, EventArgs e)
         {
+            var b = sender as ImageButton;
+            await DisplayAlert("Notify", places[b.TabIndex].name, "OK");
+        }
+
+        private async void DisplayPlaces(string cityId, string Placetype)
+        {
+            // get places from api (store them in list)
             this.places = await api.GetPlaces(cityId, Placetype);
-            int count = 0;
+
+            // steam to save images temporary
+            byte[] Base64Streams;
+
+            // 
+            int counter = 0;
             foreach (var place in places)
             {
-                result.Text += place.name + "\n";
-                byte[] Base64Stream = Convert.FromBase64String(await api.image(place.id));
-                imgs.Add(new ImgsBind()
-                {
-                    source = ImageSource.FromStream(() => new MemoryStream(Base64Stream)),
-                    index = count
-                });
-                count++;
+                // convert string to array of bytes
+                Base64Streams =   Convert.FromBase64String(await api.image(place.id));
+
+                // Add binded information (to view them in xaml view)
+                imgFrames.Add(new ImageFrame(place.name, ImageSource.FromStream(() => new MemoryStream(Base64Streams)), counter));
+
+                counter++;
             }
-            
+
+
+            BindableLayout.SetItemTemplate(imagesStackLayout, imagesList);
+            BindableLayout.SetItemsSource(imagesStackLayout, imgFrames);
+
         }
-
-
     }
 }

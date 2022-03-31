@@ -23,33 +23,29 @@
         <Label x:Name="pageTitlelbl"
                 Grid.Row="0" 
                 Grid.ColumnSpan="2" 
-                Text="Dalilak main page" 
+                Text="Dalilak" 
                 FontSize="24"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 />
 
-        <SearchBar x:Name="SBSearch"
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Placeholder="search events , places , building ..."/>
-
-        <ScrollView BackgroundColor="White" Grid.Row="2" Grid.ColumnSpan="2"  Orientation="Horizontal" x:Name="ScrollViewSclv">
+        <ScrollView BackgroundColor="White" Grid.Row="2" Grid.ColumnSpan="2"  Orientation="Vertical" x:Name="ScrollViewSclv">
             <StackLayout Orientation="Horizontal" Padding="10">
                 <Image x:Name="img"></Image>
             </StackLayout>
         </ScrollView>
 
 
-        <Button Grid.Row="3" Grid.Column="0" Text="Historical places" x:Name="HPbtn"
+        <Button Grid.Row="3" Grid.Column="0" Text="Historical places" x:Name="HPbtn" TabIndex="0"
                      FontSize="15"
                      WidthRequest="150"
                      HeightRequest="150"
                      CornerRadius="75"
                      VerticalOptions="Center"
-                     HorizontalOptions="Center"/>
+                     HorizontalOptions="Center"
+                     FontFamily="Cyrillic"/>
 
-        <Button Grid.Row="3" Grid.Column="1" Text="Natural places" x:Name="NPbtn"
+        <Button Grid.Row="3" Grid.Column="1" Text="Natural places" x:Name="NPbtn" TabIndex="1"
                      Clicked="NPbtn_Clicked"
                      FontSize="15"
                      WidthRequest="150"
@@ -58,7 +54,7 @@
                      VerticalOptions="Center"
                      HorizontalOptions="Center"/>
 
-        <Button Grid.Row="4" Grid.Column="0" Text="Schedualing" x:Name="Scbtn"
+        <Button Grid.Row="4" Grid.Column="0" Text="Schedualing" x:Name="Scbtn" 
                      FontSize="15"
                      WidthRequest="150"
                      HeightRequest="150"
@@ -66,7 +62,7 @@
                      VerticalOptions="Center"
                      HorizontalOptions="Center"/>
 
-        <Button Grid.Row="4" Grid.Column="1" Text="Events" x:Name="Evbtn"
+        <Button Grid.Row="4" Grid.Column="1" Text="Events" x:Name="Evbtn" TabIndex="2"
                      FontSize="15"
                      WidthRequest="150"
                      HeightRequest="150"
