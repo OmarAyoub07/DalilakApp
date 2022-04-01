@@ -43,7 +43,8 @@
                      CornerRadius="75"
                      VerticalOptions="Center"
                      HorizontalOptions="Center"
-                     FontFamily="Cyrillic"/>
+                     FontFamily="Cyrillic"
+                     Clicked="NPbtn_Clicked"/>
 
         <Button Grid.Row="3" Grid.Column="1" Text="Natural places" x:Name="NPbtn" TabIndex="1"
                      Clicked="NPbtn_Clicked"

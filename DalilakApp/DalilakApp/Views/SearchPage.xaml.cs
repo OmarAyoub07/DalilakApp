@@ -48,6 +48,7 @@ namespace DalilakApp.Views
                 // Add binded information (to view them in xaml view)
                 imgFrames.Add(new ImageFrame(place.name, ImageSource.FromStream(() => new MemoryStream(Base64Streams)), counter));
 
+                
                 counter++;
             }
 

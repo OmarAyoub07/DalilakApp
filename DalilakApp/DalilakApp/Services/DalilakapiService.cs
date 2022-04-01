@@ -39,7 +39,7 @@ namespace DalilakApp.Services
             uri = null;
 
             if (response.IsSuccessStatusCode)
-                return response.Content.ReadAsStringAsync().Result.ToString().Split(',')[1];
+                return response.Content.ReadAsStringAsync().Result.ToString();
             else
                 return null;
         }
