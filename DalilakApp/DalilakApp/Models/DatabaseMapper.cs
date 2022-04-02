@@ -13,7 +13,7 @@
         public string name { get; set; }
         public bool user_type { get; set; }
         public int age { get; set; }
-        public string image { get; set; }
+        public byte[] image { get; set; }
         public string information { get; set; }
         public string record_doc { get; set; }
 
@@ -34,7 +34,6 @@
         public string statstc_doc { get; set; }
         public int totl_likes { get; set; }
         public int totl_visits { get; set; }
-
         public string city_id { get; set; }
 
     }
