@@ -36,10 +36,15 @@ namespace DalilakApp
             }
         }
 
+
         private async void displayImages()
         {
-            byte[] Base64Stream = Convert.FromBase64String(await api.image("af34c299aba449acac4c75f3dfb45ce2"));
-            img.Source = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
+            var imgs = await api.adsImage("2502dd29-90b6-11ec-8743-bc64bf92");
+
+            img1.Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(imgs[0])));//imgs[0];
+            img2.Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(imgs[1])));
+
+
         }
 
         /* Register function - called during login process in special case */

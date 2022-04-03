@@ -29,9 +29,10 @@
                 VerticalOptions="Center"
                 />
 
-        <ScrollView BackgroundColor="White" Grid.Row="2" Grid.ColumnSpan="2"  Orientation="Vertical" x:Name="ScrollViewSclv">
+        <ScrollView BackgroundColor="White" Grid.Row="2" Grid.ColumnSpan="2"  Orientation="Horizontal" x:Name="ScrollViewSclv">
             <StackLayout Orientation="Horizontal" Padding="10">
-                <Image x:Name="img"></Image>
+                <Image x:Name="img1"></Image>
+                <Image x:Name="img2"></Image>
             </StackLayout>
         </ScrollView>
 

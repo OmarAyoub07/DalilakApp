@@ -43,6 +43,25 @@ namespace DalilakApp.Services
             else
                 return null;
         }
+
+        public async Task<List<string>> adsImage(string id)
+        {
+
+            uri = new Uri("http://api.dalilak.pro/Query/Ads_?city_id=" + id);
+
+            response = await client.GetAsync(uri);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<string>>(response.Content.ReadAsStringAsync().Result);
+                //return response.Content.ReadAsStringAsync().Result.ToString();
+            }
+            else
+                return null;
+        }
+
         /* Functaion to get RNG */
         public async Task<string> getRNG()
         {
