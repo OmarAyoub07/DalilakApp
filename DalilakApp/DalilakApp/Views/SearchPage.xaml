@@ -2,13 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DalilakApp.Views.SearchPage"
-             Title="search">
+             Title="Search"
+             >
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="5">
 
             <SearchBar x:Name="SBSearch"
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
                 Placeholder="search events , places , building ..."/>
             
             <ScrollView HorizontalOptions="FillAndExpand" Orientation="Vertical" VerticalOptions="FillAndExpand">
@@ -31,14 +30,18 @@
                                     Aspect="AspectFill"
                                     TabIndex="{Binding index}"
                                     Clicked="btn_images_clicked"
-                                    
                                     />
-                                <Label HorizontalOptions="Start" VerticalOptions="End"
-                                       Text="{Binding name}"
-                                       TextColor="Black"
-                                       FontSize="Large"
-                                       BackgroundColor="SeaShell"
-                                       Grid.Row="0"/>
+                                
+                                <Label 
+                                    Padding="10"
+                                    HorizontalOptions="Start" VerticalOptions="Center"
+                                    Text="{Binding name}"
+                                    TextColor="White"
+                                    FontSize="Large"
+                                    FontAttributes="Bold"
+                                    Grid.Row="0"
+                                    BackgroundColor="Transparent"
+                                    />
                             </Grid>
 
 

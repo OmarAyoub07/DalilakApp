@@ -11,7 +11,7 @@ namespace DalilakApp
             InitializeComponent();
 
             // The root page of your application
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new TabbedPageMain());
         }
 
         protected override void OnStart()
