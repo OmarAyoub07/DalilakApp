@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DalilakApp.CBot">
+             x:Class="DalilakApp.Views.ChatBot"
+             Title="Chat Bot"
+             >
+    
     <ContentPage.Content>
 
         <WebView Source="https://webchat.botframework.com/embed/dalilakproapp-bot?s=XXiPuq0M2gk.PsWgK1ZAuVo92QIF8r-CjuI4d1-AJWI4-je30HBY8N0"/>

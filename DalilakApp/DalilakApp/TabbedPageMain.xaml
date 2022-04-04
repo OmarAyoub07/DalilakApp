@@ -4,10 +4,13 @@
             x:Class="DalilakApp.TabbedPageMain"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" 
             xmlns:TabPagesMain="clr-namespace:DalilakApp"
+            xmlns:TabPageViewas="clr-namespace:DalilakApp.Views"
             android:TabbedPage.ToolbarPlacement="Bottom"
             BarTextColor="Black">
   <!--Pages can be added as references or inline-->
     <TabPagesMain:MainPage/>
+    <TabPageViewas:ChatBot/>
+    <!--<TabPageViewas:RecordPage/>-->
     <!--<TabPagesViews:ProfilePage/>-->
 
 </TabbedPage>
