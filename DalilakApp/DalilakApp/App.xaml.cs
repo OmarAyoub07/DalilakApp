@@ -6,11 +6,13 @@ namespace DalilakApp
 {
     public partial class App : Application
     {
+        public static User user { get; set; }
         public App()
         {
             InitializeComponent();
 
             // The root page of your application
+            user = null;
             MainPage = new NavigationPage(new TabbedPageMain());
         }
 

@@ -27,7 +27,9 @@ namespace DalilakApp.Views
         private async void btn_images_clicked(object sender, EventArgs e)
         {
             var b = sender as ImageButton;
-            await DisplayAlert("Notify", places[b.TabIndex].name, "OK");
+            //await DisplayAlert("Notify", places[b.TabIndex].id, "OK");
+            await Navigation.PushAsync(new PlaceInfo(places[b.TabIndex].id));
+
         }
 
         private async void DisplayPlaces(string cityId, string Placetype)

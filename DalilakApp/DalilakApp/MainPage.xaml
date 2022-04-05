@@ -66,6 +66,7 @@
                      HorizontalOptions="Center"/>
 
         <Button Grid.Row="4" Grid.Column="1" Text="Events" x:Name="Evbtn" TabIndex="2"
+                     Clicked="NPbtn_Clicked"
                      FontSize="15"
                      WidthRequest="150"
                      HeightRequest="150"

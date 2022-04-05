@@ -7,6 +7,7 @@ using System.IO;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace DalilakApp.Views
 {
@@ -14,43 +15,36 @@ namespace DalilakApp.Views
     public partial class ProfilePage : ContentPage
     {
         private Services.DalilakapiService api = new Services.DalilakapiService();
-        private User user = new User();
-        public ProfilePage(User u)
+        private byte[] avatarImg = null;
+        public ProfilePage()
         {
             InitializeComponent();
-            user =u;
             displayImage();
-
-            
-            email.Text = user.email;
-            phone_num.Text =user.phone_num;
-            name.Text = user.name;
-            age.Text = Convert.ToString(this.user.age) ;
-            information.Text =  user.information;
-            city.Text = user.city_id;
+            SetLables();
         }
         private async void displayImage()
         {
-            byte[] Base64Stream = Convert.FromBase64String(await api.getProfileImage(user.id));
+            byte[] Base64Stream = Convert.FromBase64String(await api.getProfileImage(App.user.id));
             img.Source = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
         }
 
         private void btn_favorit_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new RecordPage(user.id,true));
+            Navigation.PushAsync(new RecordPage(App.user.id,true));
         }
         private void btn_history_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new RecordPage(user.id));
+            Navigation.PushAsync(new RecordPage(App.user.id));
         }
 
         private async void btn_ok_Clicked(object sender, EventArgs e)
         {
-             
-
             if (int.TryParse(Eage.Text, out int n))
             {
-                Boolean state = await api.UpdateUser(user.id, Ename.Text, Convert.ToInt32(this.Eage.Text), Einformation.Text, Ecity.Text);
+                Boolean state = await api.UpdateUser(App.user.id, Ename.Text, Convert.ToInt32(this.Eage.Text), Einformation.Text, Ecity.Text);
+                if(avatarImg != null)
+                    state = await api.PostProfileImg(App.user.id, avatarImg);
+
                 if (state)
                 {
                     await DisplayAlert("Note", " The data has been modified  ", "OK");
@@ -60,6 +54,9 @@ namespace DalilakApp.Views
                     noEdit.IsVisible = true;
                     btn_ok.IsVisible = false;
                     Edit.IsVisible = false;
+                    App.user = await api.getUser(App.user.id);
+                    SetLables();
+                    displayImage();
                 }
                 else
                 {
@@ -67,24 +64,21 @@ namespace DalilakApp.Views
                 }
             }
             else
-                await DisplayAlert("ERROR", " Please verify the data entered ", "OK");
-            
-
-
-            
+                await DisplayAlert("ERROR", " Please verify the data entered ", "OK"); 
         }
-        private  void btn_edit_Clicked(object sender, EventArgs e)
+        private void btn_edit_Clicked(object sender, EventArgs e)
         {
             noEdit.IsVisible = false;
             Edit.IsVisible = true;
-            Ename.Placeholder = user.name;
-            Eage.Placeholder += user.age;
-            Einformation.Placeholder = user.information;
-            Ecity.Placeholder = user.city_id;
+            Ename.Placeholder = App.user.name;
+            Eage.Placeholder += App.user.age;
+            Einformation.Placeholder = App.user.information;
+            Ecity.Placeholder = App.user.city_id;
             btn_edit.IsVisible = false;
             btn_history.IsVisible = false;
             btn_favorit.IsVisible = false;
             btn_ok.IsVisible = true;
+            btn_Img.IsVisible = true;
 
             /*
             Boolean state = await api.UpdateUser(user.id, name.Text, Convert.ToInt32(this.age.Text), information.Text, city.Text);
@@ -95,6 +89,46 @@ namespace DalilakApp.Views
                 await DisplayAlert("ERROR", " Please verify the data entered ", "OK");
             */
 
+        }
+
+        private async void btn_Img_Clicked(object sender, EventArgs e)
+        {
+            var result = await FilePicker.PickAsync();
+            if (result != null)
+            {
+                Stream stream = await result.OpenReadAsync();
+                BinaryReader b_reader = new BinaryReader(stream);
+
+                avatarImg = b_reader.ReadBytes((Int32)stream.Length);
+            }
+        }
+
+        private async void btn_Guider_Clicked(object sender, EventArgs e)
+        {
+            var result = await FilePicker.PickAsync();
+            if (result != null)
+            {
+                Stream stream = await result.OpenReadAsync();
+                BinaryReader b_reader = new BinaryReader(stream);
+
+                byte[] file = b_reader.ReadBytes((Int32)stream.Length);
+
+                bool isPosted = await api.PostCV(App.user.id, file);
+                if(isPosted)
+                    await DisplayAlert("Note", "The CV has been Posted", "OK");
+                else
+                    await DisplayAlert("Note", "CV has not been posted", "OK");
+            }
+        }
+
+        private void SetLables()
+        {
+            email.Text = App.user.email;
+            phone_num.Text =App.user.phone_num;
+            name.Text = App.user.name;
+            age.Text = Convert.ToString(App.user.age);
+            information.Text =  App.user.information;
+            city.Text = App.user.city_id;
         }
     }
 }

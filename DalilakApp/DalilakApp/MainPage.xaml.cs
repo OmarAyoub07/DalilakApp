@@ -16,7 +16,6 @@ namespace DalilakApp
 
     {
         private Services.DalilakapiService api = new Services.DalilakapiService();
-        private User user=null;
         public MainPage()
         {
             InitializeComponent();
@@ -25,14 +24,23 @@ namespace DalilakApp
             displayImages();
         }
 
+        // This function Executed when the user back to this page 
+        protected override void OnAppearing()
+        {
+            //Write the code of your page here
+            base.OnAppearing();
+            if (App.user != null)
+                loginbtn.Text=App.user.name;
+        }
+
         private async void btn_login_Clicked(object sender, EventArgs e)
         {
-            if(user == null)
+            if(App.user == null)
                 login();
             else
             {
                 // Open profiel
-                await Navigation.PushAsync(new ProfilePage(user));
+                await Navigation.PushAsync(new ProfilePage());
             }
         }
 
@@ -70,9 +78,9 @@ namespace DalilakApp
                             if (isPosted == true)
                             {
                                 string result = await api.login(phone);
-                                user = new User();
-                                user = await api.getUser(result);
-                                loginbtn.Text = user.name;
+                                App.user = new User();
+                                App.user = await api.getUser(result);
+                                loginbtn.Text = App.user.name;
                                 break;
                             }
                             else
@@ -119,9 +127,9 @@ namespace DalilakApp
                         }
                         else
                         {
-                            user = new User();
-                            user = await api.getUser(result);
-                            loginbtn.Text = user.name; // test button should be changed later
+                            App.user = new User();
+                            App.user = await api.getUser(result);
+                            loginbtn.Text = App.user.name; // test button should be changed later
                         }
                         break;
                     }
@@ -144,7 +152,7 @@ namespace DalilakApp
             var button = sender as Button;
             string place_type = button.TabIndex == 0 ? "HIS" : button.TabIndex == 1 ? "NAT" : "VNT";
             await Navigation.PushAsync(new SearchPage("2502dd29-90b6-11ec-8743-bc64bf92", place_type));
-                //2502dd29-90b6-11ec-8743-bc64bf92 Taif city ID
+                //2502dd29-90b6-11ec-8743-bc64bf92 / Taif city ID
 
         }
     }

@@ -5,75 +5,82 @@
              >
     
     <ContentPage.Content>
-        <StackLayout Padding="10">
-            <StackLayout>
-            <Image x:Name="img"></Image>
-             </StackLayout>
-            <StackLayout>
-                <Label Text="Phone number" />
-                <Label x:Name="phone_num"
+        <ScrollView BackgroundColor="White" Grid.ColumnSpan="2"  Orientation="Vertical">
+
+            <StackLayout Padding="10" x:Name="form_ViewInfo">
+                <StackLayout>
+                    <Image x:Name="img"></Image>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Phone number" />
+                    <Label x:Name="phone_num"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            </StackLayout>
-            
-            <StackLayout>
-                <Label Text="Email" />
-                <Label x:Name="email"
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Email" />
+                    <Label x:Name="email"
                  VerticalOptions="CenterAndExpand" 
                  HorizontalOptions="CenterAndExpand" />
-            </StackLayout>
-            <StackLayout x:Name="noEdit">
-                <StackLayout>
-                    <Label Text="Name" />
-                    <Label x:Name="name"
+                </StackLayout>
+                <StackLayout x:Name="noEdit">
+                    <StackLayout>
+                        <Label Text="Name" />
+                        <Label x:Name="name"
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand" />
-                </StackLayout>
-                <StackLayout>
-                    <Label Text="Age" />
-                    <Label x:Name="age"
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Age" />
+                        <Label x:Name="age"
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand" />
-                </StackLayout>
-                <StackLayout>
-                    <Label Text="Information" />
-                    <Label x:Name="information"
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Information" />
+                        <Label x:Name="information"
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand" />
-                </StackLayout>
-                <StackLayout>
-                    <Label Text="City" />
-                    <Label x:Name="city"
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="City" />
+                        <Label x:Name="city"
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand" />
-                
-                </StackLayout>
-            </StackLayout>
-            <StackLayout x:Name="Edit" IsVisible="false">
-                <StackLayout>
-                    <Label Text="Name" />
-                     <Entry x:Name="Ename" Text=""></Entry>
-                </StackLayout>
-                <StackLayout>
-                    <Label Text="Age" />
-                    <Entry x:Name="Eage" Text=""></Entry>
-                </StackLayout>
-                <StackLayout>
-                    <Label Text="information" />
-                    <Entry x:Name="Einformation" Text=""></Entry>
-                </StackLayout>
-                <StackLayout>
-                    <Label Text="city" />
-                    <Entry x:Name="Ecity" Text=""></Entry>
-                </StackLayout>
-            </StackLayout>
 
-            <Button Text="edit" x:Name="btn_edit" Clicked="btn_edit_Clicked" />
-            <Button Text="history" x:Name="btn_history" Clicked="btn_history_Clicked" />
-            <Button Text="ok" x:Name="btn_ok" Clicked="btn_ok_Clicked" IsVisible="false" />
-            <Button Text="favorit" x:Name="btn_favorit" Clicked="btn_favorit_Clicked" />
-            <!--<Button Text="gaider" x:Name="btn_gaider" Clicked="btn_gaider_Clicked" />-->
-        </StackLayout>
-        
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout x:Name="Edit" IsVisible="false">
+                    <StackLayout>
+                        <Label Text="Name" />
+                        <Entry x:Name="Ename" Text=""></Entry>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Age" />
+                        <Entry x:Name="Eage" Text=""></Entry>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="information" />
+                        <Entry x:Name="Einformation" Text=""></Entry>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="city" />
+                        <Entry x:Name="Ecity" Text=""></Entry>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Padding="10" x:Name="form_EditInfo">
+                    <Button Text="Add New Image" x:Name="btn_Img" Clicked="btn_Img_Clicked" IsVisible="false" />
+                    <Button Text="ok" x:Name="btn_ok" Clicked="btn_ok_Clicked" IsVisible="false" />
+                </StackLayout>
+                
+                <Button Text="edit" x:Name="btn_edit" Clicked="btn_edit_Clicked" />
+                <Button Text="history" x:Name="btn_history" Clicked="btn_history_Clicked" />
+                <Button Text="favorit" x:Name="btn_favorit" Clicked="btn_favorit_Clicked" />
+                <Button Text="Post Guider CV" x:Name="btn_Guider" Clicked="btn_Guider_Clicked" />
+            </StackLayout>
+        </ScrollView>
+
     </ContentPage.Content>
 </ContentPage>

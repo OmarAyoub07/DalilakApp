@@ -174,5 +174,87 @@ namespace DalilakApp.Services
             else
                 return null;
         }
+
+        /* Get Information of one place*/
+        public async Task<Place> GetPlace(string place_id)
+        {
+            uri = new Uri("http://api.dalilak.pro/Query/Place_?palce_id=" + place_id);
+
+            response = await client.GetAsync(uri);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<List<Place>>(response.Content.ReadAsStringAsync().Result)[0];
+            else
+                return null;
+        }
+        public async Task<List<Reviewer>> GetComments(string place_id)
+        {
+            uri = new Uri("http://api.dalilak.pro/Query/PlaceComments_?place_id=" + place_id);
+
+            response = await client.GetAsync(uri);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<List<Reviewer>>(response.Content.ReadAsStringAsync().Result);
+            else
+                return null;
+        }
+
+
+        /* Post CV to Admin */
+        public async Task<bool> PostCV(string user_id, byte[] file)
+        {
+            uri = new Uri("http://api.dalilak.pro/Insert/Request_?user_id="+user_id);
+
+            var stringPayload = JsonConvert.SerializeObject(file); // File is the body of the request
+            var content = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+
+            response = await client.PostAsync(uri, content);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+                return Convert.ToBoolean(response.Content.ReadAsStringAsync().Result);
+            else
+                return false;
+        }
+
+        public async Task<bool> PostPlace(string user_id, string[] body, string operation)
+        {
+            operation = "New Add - "+operation;
+            uri = new Uri("http://api.dalilak.pro/Insert/Modification_?user_id="+user_id+"&operation="+operation);
+
+            var stringPayload = JsonConvert.SerializeObject(body); // File is the body of the request
+            var content = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+
+            response = await client.PostAsync(uri, content);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+                return Convert.ToBoolean(response.Content.ReadAsStringAsync().Result);
+            else
+                return false;
+        }
+
+        public async Task<bool> PostProfileImg(string user_id, byte[] img)
+        {
+            uri = new Uri("http://api.dalilak.pro/Insert/UpdateProfile_?user_id="+user_id);
+
+            var stringPayload = JsonConvert.SerializeObject(img); // File is the body of the request
+            var content = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+
+            response = await client.PostAsync(uri, content);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+                return Convert.ToBoolean(response.Content.ReadAsStringAsync().Result);
+            else
+                return false;
+        }
     }
 }
