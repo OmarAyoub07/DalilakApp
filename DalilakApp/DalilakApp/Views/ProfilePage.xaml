@@ -15,31 +15,62 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             </StackLayout>
+            
             <StackLayout>
                 <Label Text="Email" />
                 <Label x:Name="email"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                 VerticalOptions="CenterAndExpand" 
+                 HorizontalOptions="CenterAndExpand" />
             </StackLayout>
-            <StackLayout>
-                <Label Text="Name" />
-                <Entry x:Name="name" Text=""></Entry>
+            <StackLayout x:Name="noEdit">
+                <StackLayout>
+                    <Label Text="Name" />
+                    <Label x:Name="name"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Age" />
+                    <Label x:Name="age"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Information" />
+                    <Label x:Name="information"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="City" />
+                    <Label x:Name="city"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" />
+                
+                </StackLayout>
             </StackLayout>
-            <StackLayout>
-                <Label Text="Age" />
-                <Entry x:Name="age" Text=""></Entry>
-            </StackLayout>
-            <StackLayout>
-                <Label Text="information" />
-                <Entry x:Name="information" Text=""></Entry>
-            </StackLayout>
-            <StackLayout>
-                <Label Text="city" />
-                <Entry x:Name="city" Text=""></Entry>
+            <StackLayout x:Name="Edit" IsVisible="false">
+                <StackLayout>
+                    <Label Text="Name" />
+                     <Entry x:Name="Ename" Text=""></Entry>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Age" />
+                    <Entry x:Name="Eage" Text=""></Entry>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="information" />
+                    <Entry x:Name="Einformation" Text=""></Entry>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="city" />
+                    <Entry x:Name="Ecity" Text=""></Entry>
+                </StackLayout>
             </StackLayout>
 
-            <Button Text="history" x:Name="btn_history" Clicked="btn_history_Clicked" />
             <Button Text="edit" x:Name="btn_edit" Clicked="btn_edit_Clicked" />
+            <Button Text="history" x:Name="btn_history" Clicked="btn_history_Clicked" />
+            <Button Text="ok" x:Name="btn_ok" Clicked="btn_ok_Clicked" IsVisible="false" />
             <Button Text="favorit" x:Name="btn_favorit" Clicked="btn_favorit_Clicked" />
             <!--<Button Text="gaider" x:Name="btn_gaider" Clicked="btn_gaider_Clicked" />-->
         </StackLayout>
