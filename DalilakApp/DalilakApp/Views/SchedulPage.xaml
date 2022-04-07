@@ -3,10 +3,168 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DalilakApp.Views.SchedulPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout >
+                <Label x:Name="Headr" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <StackLayout x:Name="form_listOfSchdls">
+
+                    <StackLayout x:Name="list" BindableLayout.ItemsSource="{Binding SchdlsListForm}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:Name="SchdlsList">
+
+                                <Grid HorizontalOptions="Center"
+                                      VerticalOptions="Center">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label 
+                                        Padding="10"
+                                        HorizontalOptions="Start" VerticalOptions="Center"
+                                        Text="{Binding city}"
+                                        TextColor="Black"
+                                        FontSize="Large"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="Transparent"
+                                        />
+                                    <Label 
+                                        Padding="10"
+                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                        Text="{Binding date}"
+                                        TextColor="Black"
+                                        FontSize="Large"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="Transparent"
+                                        />
+                                    <Button 
+                                        HorizontalOptions="End" VerticalOptions="Center"
+                                        Text="View" TabIndex="{Binding index}"
+                                        TextColor="Black"
+                                        FontSize="Large"
+                                        FontAttributes="Bold"
+                                        Clicked="btn_view_Schdl"
+                                        />
+
+                                </Grid>
+                            </DataTemplate>
+                        
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                    <Button Text="+" HorizontalOptions="End" VerticalOptions="End" Clicked="btn_Add_Schdl"/>
+                </StackLayout>
+
+                <StackLayout x:Name="form_ViewOneSchdl">
+                    
+                    <StackLayout BindableLayout.ItemsSource="{Binding SchdlViewForm}" x:Name="table">
+                        <BindableLayout.ItemTemplate>
+
+                            <DataTemplate>
+                                <Grid HorizontalOptions="Center"
+                                      VerticalOptions="Center">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label 
+                                        Padding="10"
+                                        HorizontalOptions="Start" VerticalOptions="Center"
+                                        Text="{Binding date}"
+                                        TextColor="Black"
+                                        FontSize="Small"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="Transparent"
+                                        />
+
+                                    <Label 
+                                        Padding="10"
+                                        HorizontalOptions="End" VerticalOptions="Center"
+                                        Text="{Binding distination}"
+                                        TextColor="Black"
+                                        FontSize="Small"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="Transparent"
+                                        />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+                
+                <StackLayout x:Name="form_AddManualSchdl">
+                    <Label Text="Select Place" x:Name="lbl_slctPlace"></Label>
+                    <Picker Title="Select Place" x:Name="placesPicker"/>
+
+                    <Label Text="Select Date"></Label>
+                    <DatePicker x:Name="pkr_date1"/>
+
+                    <Label Text="To" x:Name="lbl_toDate"></Label>
+                    <DatePicker x:Name="pkr_date2"/>
+                    
+                    <StackLayout x:Name="rdlst_VisitsRate">
+                        <Label Text="When is The best time for you to go out ?" />
+                        <RadioButton Content="Rush hours"  x:Name="rdbtn_high" Value="0.55"/>
+                        <RadioButton Content="Light traffic" x:Name="rdbtn_lght" Value="0.45"/>
+                        <RadioButton Content="Natural crowd" x:Name="rdbtn_norm" Value="0.35"/>
+                        <RadioButton Content="Slack times" x:Name="rdbtn_low" Value="0.25"
+                        IsChecked="true" />
+                    </StackLayout>
+
+
+                    <Label Text="Select Time" x:Name="lbl_slctTime"></Label>
+                    <TimePicker x:Name="pkr_time"/>
+
+                    <Button Text="Add this record to your plan" x:Name="btn_savePlan" Clicked="btn_addTo_plan"/>
+                    <Label Text="Your Trip Plan" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                    <StackLayout BindableLayout.ItemsSource="{Binding SchdlViewForm}" x:Name="newPlantable">
+                        <BindableLayout.ItemTemplate>
+
+                            <DataTemplate>
+                                <Grid HorizontalOptions="Center"
+                                      VerticalOptions="Center">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label 
+                                        Padding="10"
+                                        HorizontalOptions="Start" VerticalOptions="Center"
+                                        Text="{Binding date}"
+                                        TextColor="Black"
+                                        FontSize="Small"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="Transparent"
+                                        />
+
+                                    <Label 
+                                        Padding="10"
+                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                        Text="{Binding distination}"
+                                        TextColor="Black"
+                                        FontSize="Small"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="Transparent"
+                                        />
+                                    <Button Text="Remove" HorizontalOptions="End" VerticalOptions="Center" Clicked="btn_remove_fromPlan"/>
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+                    <Button Text="Save" Clicked="btn_save_plan"/>
+                </StackLayout>
+
+                <StackLayout x:Name="form_AddAutoSchdl">
+
+                </StackLayout>
+                
+                <Button x:Name="btn_back" Clicked="btn_viewList" Text="Back"/>
+            </StackLayout>
+            
+        </ScrollView>
+
     </ContentPage.Content>
 </ContentPage>

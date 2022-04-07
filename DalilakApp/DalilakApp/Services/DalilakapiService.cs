@@ -256,5 +256,52 @@ namespace DalilakApp.Services
             else
                 return false;
         }
+
+        public async Task<List<Schedules>> GetScheduals(string user_id)
+        {
+            uri = new Uri("http://api.dalilak.pro/Query/ListOfSchdls_?user_id=" + user_id);
+
+            response = await client.GetAsync(uri);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<List<Schedules>>(response.Content.ReadAsStringAsync().Result);
+            else
+                return null;
+        }
+
+        public async Task<bool> PostSchedules(string user_id, Schedules schedule)
+        {
+            uri = new Uri("http://api.dalilak.pro/Insert/Schedule_?user_id="+user_id);
+
+            var stringPayload = JsonConvert.SerializeObject(schedule); // File is the body of the request
+            var content = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+
+            response = await client.PostAsync(uri, content);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+                return Convert.ToBoolean(response.Content.ReadAsStringAsync().Result);
+            else
+                return false;
+        }
+
+        public async Task<List<Schedules>> GenerateSchdl(string user_id, string city_id, string fromDate, string toDate, float VisitsRate)
+        {
+            uri = new Uri(
+                "http://api.dalilak.pro/Predict/GenerateSchedule_?user_id=" + user_id 
+                +"&cityID=" + city_id + "&fromDate="+fromDate+"&toDate="+toDate+"&crowdRate="+VisitsRate);
+
+            response = await client.GetAsync(uri);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<List<Schedules>>(response.Content.ReadAsStringAsync().Result);
+            else
+                return null;
+        } 
     }
 }

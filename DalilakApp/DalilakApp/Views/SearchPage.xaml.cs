@@ -17,11 +17,11 @@ namespace DalilakApp.Views
         private List<Place> places = new List<Place>();
         private List<ImageFrame> imgFrames = new List<ImageFrame>();
 
-        public SearchPage(string cityId, string Placetype)
+        public SearchPage(string Placetype)
         {
             InitializeComponent();
 
-            DisplayPlaces(cityId, Placetype);
+            DisplayPlaces(App.cityID, Placetype);
         }
 
         private async void btn_images_clicked(object sender, EventArgs e)
