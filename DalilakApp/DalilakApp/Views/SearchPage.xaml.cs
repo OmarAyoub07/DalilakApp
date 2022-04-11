@@ -17,10 +17,14 @@ namespace DalilakApp.Views
         private List<Place> places = new List<Place>();
         private List<ImageFrame> imgFrames = new List<ImageFrame>();
 
-        public SearchPage(string Placetype)
+        public SearchPage()
         {
             InitializeComponent();
-
+        }
+        public SearchPage(string Placetype, string placeNature)
+        {
+            InitializeComponent();
+            Title = placeNature;
             DisplayPlaces(App.cityID, Placetype);
         }
 
@@ -37,27 +41,20 @@ namespace DalilakApp.Views
             // get places from api (store them in list)
             this.places = await api.GetPlaces(cityId, Placetype);
 
-            // steam to save images temporary
-            byte[] Base64Streams;
-
-            // 
             int counter = 0;
             foreach (var place in places)
             {
                 // convert string to array of bytes
-                Base64Streams =   Convert.FromBase64String(await api.image(place.id));
+                byte[] Base64Streams =   Convert.FromBase64String(await api.image(place.id));
 
                 // Add binded information (to view them in xaml view)
                 imgFrames.Add(new ImageFrame(place.name, ImageSource.FromStream(() => new MemoryStream(Base64Streams)), counter));
 
-                
                 counter++;
             }
 
 
-            BindableLayout.SetItemTemplate(imagesStackLayout, imagesList);
             BindableLayout.SetItemsSource(imagesStackLayout, imgFrames);
-
         }
     }
 }

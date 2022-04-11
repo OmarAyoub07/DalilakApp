@@ -49,10 +49,8 @@ namespace DalilakApp
         {
             var imgs = await api.adsImage("2502dd29-90b6-11ec-8743-bc64bf92");
 
-            img1.Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(imgs[0])));//imgs[0];
-            img2.Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(imgs[1])));
-
-
+            //img1.Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(imgs[0])));//imgs[0];
+            ad_Img.Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(imgs[1])));
         }
 
         /* Register function - called during login process in special case */
@@ -151,12 +149,17 @@ namespace DalilakApp
         {
             var button = sender as Button;
             string place_type = button.TabIndex == 0 ? "HIS" : button.TabIndex == 1 ? "NAT" : "VNT";
-            await Navigation.PushAsync(new SearchPage(place_type));
+            string place_nature = button.TabIndex == 0 ? "Historical Places" : button.TabIndex == 1 ? "Natural Places" : "Events";
+
+            await Navigation.PushAsync(new SearchPage(place_type, place_nature));
         }
 
         private async void btn_schedualing_clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SchedulPage());
+            if(App.user == null)
+                await DisplayAlert("Notify!", " You must Loin to use this feature ", "OK");
+            else
+                await Navigation.PushAsync(new SchedulPage());
         }
     }
 }

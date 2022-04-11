@@ -2,85 +2,203 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DalilakApp.Views.ProfilePage"
-             >
-    
+             xmlns:Fa="clr-namespace:FAIcons" xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             Title="My Profile"
+             BackgroundColor="White">
+
     <ContentPage.Content>
-        <ScrollView BackgroundColor="White" Grid.ColumnSpan="2"  Orientation="Vertical">
+        <Grid >
 
-            <StackLayout Padding="10" x:Name="form_ViewInfo">
-                <StackLayout>
-                    <Image x:Name="img"></Image>
-                </StackLayout>
-                <StackLayout>
-                    <Label Text="Phone number" />
-                    <Label x:Name="phone_num"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-                </StackLayout>
+            <StackLayout Margin="0,3,0,0" x:Name="form_ViewInfo" >
 
-                <StackLayout>
-                    <Label Text="Email" />
-                    <Label x:Name="email"
+                <Frame 
+                     WidthRequest="100"
+                     HeightRequest="50"
+                     CornerRadius="75"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center"
+                     BackgroundColor="White" BorderColor="Black">
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <Label FontFamily="FAS" Text="{x:Static Fa:FontAwesomeIcons.IdCard}" TextColor="Black" FontSize="40"
+                               />
+                    </StackLayout>
+                </Frame>
+                <Frame CornerRadius="20" Margin="5" WidthRequest="350" BackgroundColor="LightGray" BorderColor="White">
+
+                    <StackLayout>
+
+                        <StackLayout HorizontalOptions="Center" >
+                            <Frame CornerRadius="15" BackgroundColor="White" >
+                                <StackLayout Orientation="Horizontal">
+
+                                    <Label x:Name="name" 
+                                    HorizontalOptions="EndAndExpand" FontAttributes="Bold" 
+                                           FontSize="15" TextColor="Black" TextTransform="Uppercase"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+
+                        <StackLayout>
+                            <Frame CornerRadius="15" BackgroundColor="White">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label FontFamily="FAS" Text="{x:Static Fa:FontAwesomeIcons.MobileButton}" TextColor="Black" FontSize="20"/>
+                                <Label x:Name="phone_num"
+                                   VerticalOptions="CenterAndExpand" 
+                                   HorizontalOptions="CenterAndExpand" TextColor="Black" />
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+
+                        <StackLayout>
+                            <Frame CornerRadius="15" BackgroundColor="White">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label FontFamily="FAS" Text="{x:Static Fa:FontAwesomeIcons.G}" TextColor="Black" FontSize="20"/>
+                                    <Label x:Name="email"
                  VerticalOptions="CenterAndExpand" 
-                 HorizontalOptions="CenterAndExpand" />
-                </StackLayout>
-                <StackLayout x:Name="noEdit">
-                    <StackLayout>
-                        <Label Text="Name" />
-                        <Label x:Name="name"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand" />
-                    </StackLayout>
-                    <StackLayout>
-                        <Label Text="Age" />
-                        <Label x:Name="age"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand" />
-                    </StackLayout>
-                    <StackLayout>
-                        <Label Text="Information" />
-                        <Label x:Name="information"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand" />
-                    </StackLayout>
-                    <StackLayout>
-                        <Label Text="City" />
-                        <Label x:Name="city"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand" />
+                 HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout x:Name="noEdit">
 
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout x:Name="Edit" IsVisible="false">
-                    <StackLayout>
-                        <Label Text="Name" />
-                        <Entry x:Name="Ename" Text=""></Entry>
-                    </StackLayout>
-                    <StackLayout>
-                        <Label Text="Age" />
-                        <Entry x:Name="Eage" Text=""></Entry>
-                    </StackLayout>
-                    <StackLayout>
-                        <Label Text="information" />
-                        <Entry x:Name="Einformation" Text=""></Entry>
-                    </StackLayout>
-                    <StackLayout>
-                        <Label Text="city" />
-                        <Entry x:Name="Ecity" Text=""></Entry>
-                    </StackLayout>
-                </StackLayout>
+                            <StackLayout>
+                                <Frame CornerRadius="15" BackgroundColor="White">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontFamily="FAS" Text="{x:Static Fa:FontAwesomeIcons.A}" TextColor="Black" FontSize="20"/>
+                                        <Label x:Name="age"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                            <StackLayout>
+                                
+                                <Frame CornerRadius="15" BackgroundColor="White" >
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontFamily="FAS" Text="{x:Static Fa:FontAwesomeIcons.CircleExclamation}" 
+                                               HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="20"/>
+                                        <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                                        <Label x:Name="information" TextColor="Black"/>
+                                        </ScrollView>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                            <StackLayout>
+                                <Frame CornerRadius="15" BackgroundColor="White">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontFamily="FAS" Text="{x:Static Fa:FontAwesomeIcons.City}" TextColor="Black" FontSize="20"/>
+                                        <Label x:Name="city"
+                    
+                    HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                            
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                                <Button  x:Name="btn_edit" 
+                                        FontFamily="FAS" Text="{x:Static Fa:FontAwesomeIcons.Pencil}"
+                                        Clicked="btn_edit_Clicked"
+                                         HeightRequest="50"
+                                         WidthRequest="50"
+                                        HorizontalOptions="EndAndExpand" CornerRadius="50" 
+                                        BackgroundColor="White" TextColor="Blue"/>
 
-                <StackLayout Padding="10" x:Name="form_EditInfo">
-                    <Button Text="Add New Image" x:Name="btn_Img" Clicked="btn_Img_Clicked" IsVisible="false" />
-                    <Button Text="ok" x:Name="btn_ok" Clicked="btn_ok_Clicked" IsVisible="false" />
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout x:Name="Edit" IsVisible="false" >
+
+                            <StackLayout>
+                                <Label Text="Name" />
+                                <Entry x:Name="Ename" Text=""></Entry>
+                            </StackLayout>
+                            <StackLayout>
+                                <Label Text="Age" />
+                                <Entry x:Name="Eage" Text=""></Entry>
+                            </StackLayout>
+                            <StackLayout>
+                                <Label Text="information" />
+                                <Entry x:Name="Einformation" Text=""></Entry>
+                            </StackLayout>
+                            <StackLayout>
+                                <Label Text="city" />
+                                <Entry x:Name="Ecity" Text=""></Entry>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout x:Name="form_EditInfo" Orientation="Horizontal">
+                            <Button Text="{x:Static Fa:FontAwesomeIcons.Image}"
+                                    FontFamily="FAS"
+                                    FontSize="20" x:Name="btn_Img" Clicked="btn_Img_Clicked" IsVisible="false"
+                                    HorizontalOptions="StartAndExpand" CornerRadius="15"
+                                    BackgroundColor="Black" TextColor="Blue" />
+                            
+                            <Button x:Name="btn_ok" Clicked="btn_ok_Clicked" IsVisible="false"
+                                    FontFamily="FAS" Text="{x:Static Fa:FontAwesomeIcons.Check}"
+                                    FontSize="20"
+                                    HorizontalOptions="EndAndExpand" CornerRadius="15"
+                                    BackgroundColor="Black" TextColor="LightGreen"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="20" Margin="5,0,5,0" BackgroundColor="Black">
+                    <StackLayout Orientation="Horizontal" >
+
+                        <Button Text="history" x:Name="btn_history" 
+                                    Clicked="btn_history_Clicked"
+                                    HorizontalOptions="StartAndExpand" CornerRadius="15"
+                                    BackgroundColor="White" TextColor="Black"/>
+
+                        <Button  FontFamily="FAS" Text="{x:Static Fa:FontAwesomeIcons.Star}" x:Name="btn_favorit" 
+                                    Clicked="btn_favorit_Clicked" 
+                                    HorizontalOptions="EndAndExpand" CornerRadius="15"
+                                    BackgroundColor="White" TextColor="Yellow"/>
+                    </StackLayout>
+                </Frame>
+                <StackLayout Orientation="Horizontal">
+
+                    <Button Text="Post Guider CV ?" x:Name="btn_Guider" 
+                                    Clicked="btn_Guider_Clicked"
+                                    HorizontalOptions="Center" CornerRadius="20"
+                                    BackgroundColor="Transparent" />
+
                 </StackLayout>
-                
-                <Button Text="edit" x:Name="btn_edit" Clicked="btn_edit_Clicked" />
-                <Button Text="history" x:Name="btn_history" Clicked="btn_history_Clicked" />
-                <Button Text="favorit" x:Name="btn_favorit" Clicked="btn_favorit_Clicked" />
-                <Button Text="Post Guider CV" x:Name="btn_Guider" Clicked="btn_Guider_Clicked" />
             </StackLayout>
-        </ScrollView>
+            <StackLayout x:Name="form_addPlace" IsVisible="false">
+                <Frame CornerRadius="20" Margin="5,0,5,0" >
+                    <StackLayout >
 
+                        <Label Text="Place Name: " />
+                        <Entry x:Name="entry_plcName" Text=""></Entry>
+
+
+                        <Label Text="Location: " />
+                        <Entry x:Name="enty_plcLoc" Text=""></Entry>
+
+
+                        <Label Text="Discription: " />
+                        <Entry x:Name="entry_plcDis" Text=""></Entry>
+
+
+                        <Label Text="Place Nature: " />
+                        <RadioButton Content="Natural Place"  x:Name="rdbtn_Nat" Value="Natural"/>
+                        <RadioButton Content="Historical Place" x:Name="rdbtn_his" Value="Historical"/>
+                        <RadioButton Content="Events" x:Name="rdbtn_vnt" Value="Event"/>
+
+
+                        <Label Text="City Name: " />
+                        <Entry x:Name="entry_cityName" Text=""></Entry>
+
+
+                        <Button Text="Image of place: " Clicked="btn_addImagePlace_Clicked" CornerRadius="20" BackgroundColor="Transparent" HorizontalOptions="Center" x:Name="btn_addImg"/>
+                        <Button Text="Add" x:Name="btn_add" Clicked="btn_add_Clicked" />
+                        <Button Text="Cancel" x:Name="btn_back" Clicked="btn_Cancel_Clicked" />
+
+
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -27,9 +27,7 @@ namespace DalilakApp.Views
         {
             InitializeComponent();
             GetScheduals();
-            Headr.Text = "Manage Trips";
             btn_back.IsVisible = false;
-
         }
 
         private void btn_view_Schdl(object sender, EventArgs e)
@@ -64,6 +62,8 @@ namespace DalilakApp.Views
             string action = await DisplayActionSheet("How do you want to add your trip Schedule ?",
                 "Cancel", null, "Manual Adding", "Auto Adding (AI-Demo)");
 
+            try 
+            { 
             if (action.Contains("Manual"))
             {
                 form_AddManualSchdl.IsVisible = true;
@@ -81,7 +81,7 @@ namespace DalilakApp.Views
                 rdlst_VisitsRate.IsVisible = false;
 
                 btn_savePlan.Text = "Add this record to your plan";
-                Headr.Text = "Manage New Trip Plan";
+                //Headr.Text = "Manage New Trip Plan";
 
                 db_schedule.city_id = App.cityID;
                 db_schedule.user_id = App.user.id;
@@ -114,6 +114,11 @@ namespace DalilakApp.Views
 
                 Headr.Text = "Recommender Expert System";
                 btn_savePlan.Text = "Generate Schedule";
+            }
+            }
+            catch (Exception ex)
+            {
+                
             }
 
         }
@@ -174,6 +179,7 @@ namespace DalilakApp.Views
                 view_schedule = new Schedules();
                 back();
                 GetScheduals();
+                displayList();
             }
         }
 

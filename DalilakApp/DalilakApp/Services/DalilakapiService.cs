@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace DalilakApp.Services
         private HttpClient client = new HttpClient();
         private HttpResponseMessage response;
         private Uri uri = null;
+
         /* Log in function */
         public async Task<string> login(string phone)
         {
@@ -303,5 +305,40 @@ namespace DalilakApp.Services
             else
                 return null;
         } 
+        public async Task<string> getCityName(string cityID)
+        {
+            uri = new Uri( "http://api.dalilak.pro/Query/Cities_");
+
+            response = await client.GetAsync(uri);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+            {
+                List<City> cities = JsonConvert.DeserializeObject<List<City>>(response.Content.ReadAsStringAsync().Result);
+                return cities.Single(C =>C.id==cityID).name;
+            }
+           
+            else
+                return null;
+        }
+
+        public async Task<bool> PostModification(string user_id, string[] body)
+        {
+            string operation = "New Add - ";
+            uri = new Uri("http://api.dalilak.pro/Insert/Modification_?operation="+operation+"&user_id="+user_id);
+
+            var stringPayload = JsonConvert.SerializeObject(body);
+            var content = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+
+            response = await client.PostAsync(uri, content);
+
+            uri = null;
+
+            if (response.IsSuccessStatusCode)
+                return Convert.ToBoolean(response.Content.ReadAsStringAsync().Result);
+            else
+                return false;
+        }
     }
 }

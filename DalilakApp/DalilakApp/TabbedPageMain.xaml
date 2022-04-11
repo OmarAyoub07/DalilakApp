@@ -6,11 +6,14 @@
             xmlns:TabPagesMain="clr-namespace:DalilakApp"
             xmlns:TabPageViewas="clr-namespace:DalilakApp.Views"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            BarTextColor="Black">
+            SelectedTabColor="White"
+            BarBackgroundColor="Black"
+            Title="Home"
+            >
   <!--Pages can be added as references or inline-->
     <TabPagesMain:MainPage/>
     <TabPageViewas:ChatBot/>
-    <!--<TabPageViewas:RecordPage/>-->
-    <!--<TabPagesViews:ProfilePage/>-->
+  
+       
 
 </TabbedPage>

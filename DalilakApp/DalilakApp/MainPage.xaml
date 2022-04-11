@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DalilakApp.MainPage" 
-             Title="Home">
+             xmlns:Fa="clr-namespace:FAIcons"
+             Title="Home" BackgroundColor="White"
+             >
     
 
     <!--left top right bottom-->
@@ -14,28 +16,45 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="50"/>
             <RowDefinition Height="150"/>
             <RowDefinition Height="175"/>
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
 
+        
+        
         <Label x:Name="pageTitlelbl"
                 Grid.Row="0" 
                 Grid.ColumnSpan="2" 
-                Text="Dalilak" 
-                FontSize="24"
+                Text="Dalilak.Pro"
+                FontSize="30"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
+                TextColor="Black"
                 />
 
-        <ScrollView BackgroundColor="White" Grid.Row="2" Grid.ColumnSpan="2"  Orientation="Horizontal" x:Name="ScrollViewSclv">
-            <StackLayout Orientation="Horizontal" Padding="10">
-                <Image x:Name="img1"/>
-                <Image x:Name="img2"/>
-            </StackLayout>
-        </ScrollView>
+
+
+        <Button Grid.Row="0" Grid.Column="1" Text="{x:Static Fa:FontAwesomeIcons.FaceLaugh}" FontFamily="FAS" x:Name="loginbtn"
+                     FontSize="20"
+                     WidthRequest="60"
+                     HeightRequest="75"
+                     CornerRadius="75"
+                     VerticalOptions="Center"
+                     HorizontalOptions="End"
+                     Clicked="btn_login_Clicked"
+                     BackgroundColor="Black" TextColor="White"/>
+
+
+        <Frame CornerRadius="25" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+               Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Image 
+            x:Name="ad_Img" 
+            Aspect="AspectFill"
+            />
+        </Frame>
 
 
         <Button Grid.Row="3" Grid.Column="0" Text="Historical places" x:Name="HPbtn" TabIndex="0"
@@ -45,44 +64,38 @@
                      CornerRadius="75"
                      VerticalOptions="Center"
                      HorizontalOptions="Center"
-                     FontFamily="Cyrillic"
-                     Clicked="NPbtn_Clicked"/>
+                     FontFamily="FAS"
+                     Clicked="NPbtn_Clicked" BorderColor="Black" BackgroundColor="Black" TextColor="White"/>
 
-        <Button Grid.Row="3" Grid.Column="1" Text="Natural places" x:Name="NPbtn" TabIndex="1"
+        <Button Grid.Row="3" Grid.Column="1" Text="{x:Static Fa:FontAwesomeIcons.Tree}" FontFamily="FAS" 
+                x:Name="NPbtn" TabIndex="1"
                      Clicked="NPbtn_Clicked"
-                     FontSize="15"
+                     FontSize="40"
                      WidthRequest="150"
                      HeightRequest="150"
                      CornerRadius="75"
                      VerticalOptions="Center"
-                     HorizontalOptions="Center"/>
+                     HorizontalOptions="Center" BackgroundColor="Black" TextColor="White"/>
 
-        <Button Grid.Row="4" Grid.Column="0" Text="Schedualing" x:Name="Scbtn" 
+        <Button Grid.Row="4" Grid.Column="0" Text="{x:Static Fa:FontAwesomeIcons.Table}" FontFamily="FAS" x:Name="Scbtn" 
                      Clicked="btn_schedualing_clicked"
-                     FontSize="15"
+                     FontSize="40"
                      WidthRequest="150"
                      HeightRequest="150"
                      CornerRadius="75"
                      VerticalOptions="Center"
-                     HorizontalOptions="Center"/>
+                     HorizontalOptions="Center" BackgroundColor="Black" TextColor="White"/>
 
-        <Button Grid.Row="4" Grid.Column="1" Text="Events" x:Name="Evbtn" TabIndex="2"
+        <Button Grid.Row="4" Grid.Column="1" Text="events" FontFamily="FAS"  x:Name="Evbtn" TabIndex="2"
                      Clicked="NPbtn_Clicked"
                      FontSize="15"
                      WidthRequest="150"
                      HeightRequest="150"
                      CornerRadius="75"
                      VerticalOptions="Center"
-                     HorizontalOptions="Center"/>
+                     HorizontalOptions="Center" BackgroundColor="White" TextColor="Black" />
         
-        <Button Grid.Row="5" Grid.Column="1" Text="Login" x:Name="loginbtn"
-                     FontSize="15"
-                     WidthRequest="150"
-                     HeightRequest="150"
-                     CornerRadius="75"
-                     VerticalOptions="Center"
-                     HorizontalOptions="Center"
-                     Clicked="btn_login_Clicked"/>
+        
     </Grid>
     
 

@@ -15,12 +15,14 @@ namespace DalilakApp.Views
     {
 
         private Services.DalilakapiService api = new Services.DalilakapiService();
+        public RecordPage()
+        {
+            InitializeComponent();
+        }
         public RecordPage(string id)
         {
             InitializeComponent();
             display(id);
-            
-
         }
         public RecordPage(string id,Boolean s)
         {

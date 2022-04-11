@@ -2,55 +2,64 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DalilakApp.Views.SearchPage"
-             Title="Search"
-             >
-    <ContentPage.Content>
-        <StackLayout Padding="5">
+             Title="Search">
 
-            <SearchBar x:Name="SBSearch"
-                Placeholder="search events , places , building ..."/>
-            
+    <ContentPage.Content >
+        <StackLayout Padding="10">
+
+            <Frame CornerRadius="40" Margin="0,0,0,10" HeightRequest="20" >
+                <SearchBar x:Name="SBSearch"
+                Placeholder="search events , places , building ..."
+                      HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Frame>
+
             <ScrollView HorizontalOptions="FillAndExpand" Orientation="Vertical" VerticalOptions="FillAndExpand">
-                <StackLayout x:Name="imagesStackLayout">
-                    
+                <StackLayout x:Name="imagesStackLayout" BindableLayout.ItemsSource="{Binding ImageFrame}">
+
                     <BindableLayout.ItemTemplate>
                         <DataTemplate x:Name="imagesList">
 
                             <Grid HorizontalOptions="Center"
                                   VerticalOptions="Center">
-                                
+
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                
-                                <ImageButton
-                                    x:Name="mybuttons"
-                                    Source="{Binding source}"
-                                    HeightRequest="200"
-                                    Aspect="AspectFill"
-                                    TabIndex="{Binding index}"
-                                    Clicked="btn_images_clicked"
-                                    />
-                                
+
+                                <Frame CornerRadius="50" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <StackLayout>
+                                        <ImageButton
+                                        x:Name="mybuttons"
+                                        Source="{Binding source}"
+                                        HeightRequest="225"
+                                        Aspect="Fill"
+                                        TabIndex="{Binding index}"
+                                        Clicked="btn_images_clicked"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand"
+                                        Padding="-20"/>
+                                    </StackLayout>
+                                </Frame>
+
                                 <Label 
-                                    Padding="10"
+                                    Padding="20"
                                     HorizontalOptions="Start" VerticalOptions="Center"
                                     Text="{Binding name}"
                                     TextColor="White"
                                     FontSize="Large"
                                     FontAttributes="Bold"
-                                    Grid.Row="0"
-                                    BackgroundColor="Transparent"
+                                    Grid.Row="0" 
                                     />
                             </Grid>
 
 
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
-                    
+
                 </StackLayout>
             </ScrollView>
-            
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

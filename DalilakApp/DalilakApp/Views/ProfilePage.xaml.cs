@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
@@ -16,16 +15,23 @@ namespace DalilakApp.Views
     {
         private Services.DalilakapiService api = new Services.DalilakapiService();
         private byte[] avatarImg = null;
+        private string placeImg = "";
+
         public ProfilePage()
         {
             InitializeComponent();
+            if(App.user.user_type == true)
+            {
+                btn_Guider.Text = "Add new place, Click here!";
+            }
+
             displayImage();
             SetLables();
         }
         private async void displayImage()
         {
-            byte[] Base64Stream = Convert.FromBase64String(await api.getProfileImage(App.user.id));
-            img.Source = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
+            byte[] Base64Stream = Convert.FromBase64String(await api.getProfileImage(App.user.id)); 
+            //img.Source = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
         }
 
         private void btn_favorit_Clicked(object sender, EventArgs e)
@@ -105,30 +111,88 @@ namespace DalilakApp.Views
 
         private async void btn_Guider_Clicked(object sender, EventArgs e)
         {
-            var result = await FilePicker.PickAsync();
-            if (result != null)
+            if (App.user.user_type == false)
             {
-                Stream stream = await result.OpenReadAsync();
-                BinaryReader b_reader = new BinaryReader(stream);
+                var result = await FilePicker.PickAsync();
+                if (result != null)
+                {
+                    Stream stream = await result.OpenReadAsync();
+                    BinaryReader b_reader = new BinaryReader(stream);
 
-                byte[] file = b_reader.ReadBytes((Int32)stream.Length);
+                    byte[] file = b_reader.ReadBytes((Int32)stream.Length);
 
-                bool isPosted = await api.PostCV(App.user.id, file);
-                if(isPosted)
-                    await DisplayAlert("Note", "The CV has been Posted", "OK");
-                else
-                    await DisplayAlert("Note", "CV has not been posted", "OK");
+                    bool isPosted = await api.PostCV(App.user.id, file);
+                    if (isPosted)
+                        await DisplayAlert("Note", "The CV has been Posted", "OK");
+                    else
+                        await DisplayAlert("Note", "CV has not been posted", "OK");
+                }
+            }
+            else
+            {
+                form_addPlace.IsVisible = true;
+                form_ViewInfo.IsVisible = false;
             }
         }
 
-        private void SetLables()
+        private async void SetLables()
         {
             email.Text = App.user.email;
             phone_num.Text =App.user.phone_num;
             name.Text = App.user.name;
             age.Text = Convert.ToString(App.user.age);
             information.Text =  App.user.information;
-            city.Text = App.user.city_id;
+            
+            city.Text =await api.getCityName( App.user.city_id);
+            
+        }
+
+        private async void btn_addImagePlace_Clicked(object sender, EventArgs e)
+        {
+            var result = await FilePicker.PickAsync();
+            if (result != null)
+            {
+                btn_addImg.Text = result.FileName;
+
+                Stream stream = await result.OpenReadAsync();
+                BinaryReader b_reader = new BinaryReader(stream);
+
+                byte[] Img = b_reader.ReadBytes((Int32)stream.Length);
+                placeImg = Convert.ToBase64String(Img);
+            }
+        }
+
+        private void btn_Cancel_Clicked(object sender, EventArgs e)
+        {
+            form_addPlace.IsVisible = false;
+
+            form_ViewInfo.IsVisible = true;
+
+        }
+
+        private async void btn_add_Clicked(object sender, EventArgs e)
+        {
+            bool isFullInfo = false;
+            isFullInfo = rdbtn_Nat.IsChecked | rdbtn_his.IsChecked | rdbtn_vnt.IsChecked;
+            isFullInfo &= entry_plcName.Text.Length > 0;
+            isFullInfo &= enty_plcLoc.Text.Length > 0;
+            isFullInfo &= entry_plcDis.Text.Length > 0;
+            isFullInfo &= entry_cityName.Text.Length > 0;
+            isFullInfo &= placeImg.Length > 100;
+
+            if (isFullInfo)
+            {
+                string placetype = rdbtn_Nat.IsChecked ? rdbtn_Nat.Value.ToString() : rdbtn_his.IsChecked ? rdbtn_his.Value.ToString() : rdbtn_vnt.Value.ToString();
+                string temp_body = entry_plcName.Text+"|"+enty_plcLoc.Text+"|"+entry_plcDis.Text+"|"+placetype+"|"+entry_cityName.Text+"|"+placeImg;
+                await api.PostModification(App.user.id, new string[] { temp_body });
+                form_addPlace.IsVisible = false;
+
+                form_ViewInfo.IsVisible = true;
+                await DisplayAlert("Notify!", " You post new place to the administaros correctly, we will notify you soon by email ", "OK");
+
+            }
+            else
+                await DisplayAlert("You'r form lacking some information!", " you must fill all fields to add a place to the system ", "OK");
         }
     }
 }

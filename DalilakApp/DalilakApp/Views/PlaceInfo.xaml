@@ -1,13 +1,82 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DalilakApp.Views.PlaceInfo">
+             x:Class="DalilakApp.Views.PlaceInfo"
+             xmlns:fa="clr-namespace:FAIcons" xmlns:dalilakapp="clr-namespace:DalilakApp" 
+             
+             Title="Place Information" >
     <ContentPage.Content>
-        <StackLayout>
-            <Image x:Name="img"></Image>
-            <Label x:Name="place" />
-            <Label x:Name="rviws" Text=" "/>
+        <ScrollView Orientation="Vertical" HeightRequest="8000">
+            <Grid Padding="5">
 
-        </StackLayout>
+                <StackLayout Padding="5" Margin="5">
+                    <StackLayout>
+
+                        <Frame Padding="-10" CornerRadius="20"  >
+                            <Image x:Name="img" 
+                               HorizontalOptions="Center"
+                               VerticalOptions="Fill" Aspect="AspectFill"
+                                   />
+                        </Frame>
+
+                    </StackLayout>
+
+                    <StackLayout >
+                        <Frame Grid.Row="1" CornerRadius="20" Margin="0" HorizontalOptions="Center" VerticalOptions="Center" >
+                            <Label x:Name="placeName" TextColor="Black" FontSize="Title" FontAttributes="Bold" TextTransform="Uppercase"/>
+                        </Frame>
+                        <Frame CornerRadius="20"  Grid.Row="2">
+                            <StackLayout>
+                                <Label Text="{x:Static fa:FontAwesomeIcons.CircleExclamation}" TextColor="Black" FontFamily="FAS" HorizontalOptions="StartAndExpand" FontSize="20"/>
+                                <Label x:Name="placeDescription" TextColor="Black" FontSize="15" LineHeight="1.2" />
+                            </StackLayout>
+                        </Frame>
+                        <Frame CornerRadius="7" Grid.Row="3">
+                            <StackLayout Orientation="Horizontal">
+                                <Label x:Name="placeLoaction" TextColor="blue" CharacterSpacing="0.5" HorizontalOptions="Start" FontSize="12"/>
+                                <Label Text="{x:Static fa:FontAwesomeIcons.LocationArrow}" FontFamily="FAS" TextColor="Black" HorizontalOptions="EndAndExpand" FontSize="15"/>
+                            </StackLayout>
+                        </Frame>
+
+                    </StackLayout>
+
+                    
+                    
+                    <StackLayout Grid.Row="4" Orientation="Vertical" >
+
+
+                        <Frame CornerRadius="50"
+                                HeightRequest="50" WidthRequest="50" HorizontalOptions="Start" x:Name="btn_comment" IsVisible="true">
+                            
+                        <Button Text="{x:Static fa:FontAwesomeIcons.Comment}" 
+                                FontFamily="FAS"
+                                FontSize="15" BackgroundColor="White"
+                                TextColor="Black"
+                                Clicked="Button_Clicked" />
+                        </Frame>
+
+                        <Frame HorizontalOptions="FillAndExpand" x:Name="fs" CornerRadius="15" VerticalOptions="FillAndExpand"  >
+                        <StackLayout x:Name="SCommentForms" IsVisible="false" BindableLayout.ItemsSource="{Binding CommentForm}" >
+                            <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout  
+                                             Orientation="Vertical" 
+                                             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                                            <Label Text="{Binding Name}"  TextColor="DarkBlue"/>
+                                            <Label Text="{Binding Comment}" TextColor="Black" />
+                                            <Label Text="{Binding DateTime}"  TextColor="Gray"/>
+                                            <Label Text="___________________________________________________" TextColor="Gray"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                        </Frame>
+
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+
     </ContentPage.Content>
 </ContentPage>
