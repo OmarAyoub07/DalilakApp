@@ -7,6 +7,7 @@ namespace DalilakApp
     public partial class App : Application
     {
         public static User user { get; set; }
+
         public static string cityID { get; set; }
 
         public static string cityName { get; set; }

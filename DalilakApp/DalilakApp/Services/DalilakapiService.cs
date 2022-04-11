@@ -316,7 +316,11 @@ namespace DalilakApp.Services
             if (response.IsSuccessStatusCode)
             {
                 List<City> cities = JsonConvert.DeserializeObject<List<City>>(response.Content.ReadAsStringAsync().Result);
-                return cities.Single(C =>C.id==cityID).name;
+
+                if (cities.Single(C => C.id==cityID).name != null)
+                    return cities.Single(C => C.id==cityID).name;
+                else
+                    return " ";
             }
            
             else
