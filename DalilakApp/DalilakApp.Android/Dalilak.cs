@@ -4,10 +4,10 @@ using Android.OS;
 
 namespace DalilakApp.Droid
 {
-    [Activity(Label = "SplashScreenDalilak",
+    [Activity(Label = "Dalilak",
         Theme = "@style/splashDalilak",
         MainLauncher =true,NoHistory =true)]
-    public class SplashScreenDalilak : Activity
+    public class Dalilak : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

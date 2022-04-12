@@ -128,12 +128,12 @@ namespace DalilakApp.Views
             if (!pkr_date2.IsVisible)
             {
                 if (placesPicker.SelectedItem.ToString().Length > 13)
-                    UpdatePlan_View(pkr_date1.Date.ToString("dd/MM/yyyy"), pkr_time.Time.ToString(), placesPicker.SelectedItem.ToString().Substring(0, 13));
+                    UpdatePlan_View(pkr_date1.Date.ToString("MM/dd/yyyy"), pkr_time.Time.ToString(), placesPicker.SelectedItem.ToString().Substring(0, 13));
 
                 else
-                    UpdatePlan_View(pkr_date1.Date.ToString("dd/MM/yyyy"), pkr_time.Time.ToString(), placesPicker.SelectedItem.ToString());
+                    UpdatePlan_View(pkr_date1.Date.ToString("MM/dd/yyyy"), pkr_time.Time.ToString(), placesPicker.SelectedItem.ToString());
 
-                UpdateScheduel_db(pkr_date1.Date.ToString("dd/MM/yyyy"), pkr_time.Time.ToString(), placesIDs[placesPicker.SelectedIndex]);
+                UpdateScheduel_db(pkr_date1.Date.ToString("MM/dd/yyyy"), pkr_time.Time.ToString(), placesIDs[placesPicker.SelectedIndex]);
             }
             else
             {
@@ -148,8 +148,8 @@ namespace DalilakApp.Views
                     visitsRate = float.Parse((string)rdbtn_norm.Value);
 
                 var list = await api.GenerateSchdl(App.user.id, App.cityID,
-                                                   pkr_date1.Date.ToString("dd/MM/yyyy"),
-                                                   pkr_date2.Date.ToString("dd/MM/yyyy"), visitsRate);
+                                                   pkr_date1.Date.ToString("MM/dd/yyyy"),
+                                                   pkr_date2.Date.ToString("MM/dd/yyyy"), visitsRate);
                 view_schedule = list[0];
                 db_schedule = list[1];
 
