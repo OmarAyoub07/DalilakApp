@@ -115,10 +115,10 @@
 
                     <StackLayout x:Name="rdlst_VisitsRate">
                         <Label Text="When is The best time for you to go out ?" />
-                        <RadioButton Content="Rush hours"  x:Name="rdbtn_high" Value="0.50"/>
-                        <RadioButton Content="Light traffic" x:Name="rdbtn_lght" Value="0.40"/>
-                        <RadioButton Content="Natural crowd" x:Name="rdbtn_norm" Value="0.30"/>
-                        <RadioButton Content="Slack times" x:Name="rdbtn_low" Value="0.20"
+                        <RadioButton Content="Rush hours"  x:Name="rdbtn_high" Value="0.45"/>
+                        <RadioButton Content="Light traffic" x:Name="rdbtn_lght" Value="0.35"/>
+                        <RadioButton Content="Natural crowd" x:Name="rdbtn_norm" Value="0.25"/>
+                        <RadioButton Content="Slack times" x:Name="rdbtn_low" Value="0.15"
                         IsChecked="true" />
                     </StackLayout>
 

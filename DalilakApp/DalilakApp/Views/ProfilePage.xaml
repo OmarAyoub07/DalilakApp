@@ -158,7 +158,7 @@
                 </Frame>
                 <StackLayout Orientation="Horizontal">
 
-                    <Button Text="Post Guider CV ?" x:Name="btn_Guider" 
+                    <Button x:Name="btn_Guider" 
                                     Clicked="btn_Guider_Clicked"
                                     HorizontalOptions="Center" CornerRadius="20"
                                     BackgroundColor="Transparent" />

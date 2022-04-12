@@ -20,12 +20,14 @@ namespace DalilakApp.Views
         public ProfilePage()
         {
             InitializeComponent();
-            if(App.user.user_type == true)
+            if (App.user.user_type == true)
             {
                 btn_Guider.Text = "Add new place, Click here!";
             }
+            else
+                btn_Guider.Text = "Post Guider CV ?";
 
-            displayImage();
+                displayImage();
             SetLables();
         }
         private async void displayImage()
@@ -142,8 +144,11 @@ namespace DalilakApp.Views
             name.Text = App.user.name;
             age.Text = Convert.ToString(App.user.age);
             information.Text =  App.user.information;
-            
-            city.Text =await api.getCityName( App.user.city_id);
+
+            if (App.user.city_id.Length == 32)
+                city.Text = await api.getCityName(App.user.city_id);
+            else
+                city.Text = " ";
             
         }
 
